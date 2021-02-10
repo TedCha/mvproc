@@ -1,0 +1,37 @@
+{
+    "name": "mvbase-proc-extension",
+    "displayName": "mvBase PROC Extension",
+    "description": "",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.53.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [
+            {
+                "id": "mvbase-proc",
+                "aliases": [
+                    "mvBase PROC",
+                    "mvbase-proc"
+                ],
+                "extensions": [
+                    ".proc"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "mvbase-proc",
+                "scopeName": "source.mvbase-proc",
+                "path": "./syntaxes/mvbase-proc.tmLanguage.json"
+            }
+        ]
+    },
+    "devDependencies": {
+        "js-yaml": "^4.0.0"
+    }
+}

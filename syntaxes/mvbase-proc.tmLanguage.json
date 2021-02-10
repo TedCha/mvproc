@@ -1,0 +1,84 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "mvBase PROC",
+	"patterns": [
+		{
+			"include": "#commands"
+		},
+		{
+			"include": "#nullary-commands"
+		},
+		{
+			"include": "#comments"
+		}
+	],
+	"repository": {
+		"commands": {
+			"patterns": [
+			{ "include": "#a-cmd" },
+			{ "include": "#d-cmd" },
+			{ "include": "#go-cmd" },
+			{ "include": "#h-cmd" },
+			{ "include": "#ih-cmd" }
+		]
+		},
+		"nullary-commands": {
+			"name": "entity.name.function",
+			"comment": "Nullary Commands",
+			"match": "^(B|BO|F|IT|RO|SP|SS|STOFF|ST OFF|STON|ST ON)$"
+		},
+		"comments": {
+			"name": "comment.line.mvbase-proc",
+			"comment": "Line Comment",
+			"match": "^C.*$"
+		},
+		"a-cmd": {
+			"comment": "A Command",
+			"match": "^(A)(\"|')?(\\d)?(?:[^\\d])?((?<=,)\\d)?",
+			"captures": {
+				"1": { "name": "entity.name.function" },
+				"2": { "name": "keyword.other.mvbase-proc"},
+				"3": { "name": "variable.parameter.mvbase-proc"},
+				"4": { "name": "variable.other.mvbase-proc"}
+			}
+		},
+		"d-cmd": {
+			"comment": "D Command",
+			"match": "^(D)(\\d)?(?:[^\\d])?((?<=,)\\d)?([+])?",
+			"captures": {
+				"1": { "name": "entity.name.function" },
+				"2": { "name": "variable.parameter.mvbase-proc" },
+				"3": { "name": "variable.other.mvbase-proc" },
+				"4": { "name": "keyword.operator.mvbase-proc" }
+			}
+		},
+		"go-cmd": {
+			"comment": "GO/G Command",
+			"match": "^(GO|G) (?:(\\d+)|(A)(\\d)?)",
+			"captures": {
+				"1": { "name": "entity.name.function" },
+				"2": { "name": "variable.parameter.mvbase-proc" },
+				"3": { "name": "entity.name.function" },
+				"4": { "name": "variable.parameter.mvbase-proc" }
+			}
+		},
+		"h-cmd": {
+			"comment": "H Command",
+			"match": "^(H)(.*?)(?:(?=[<]+$)|(?=$))(<$)?",
+			"captures": {
+				"1": { "name": "entity.name.function" },
+				"2": { "name": "string.unquoted.mvbase-proc"},
+				"3": { "name": "constant.language.mvbase-proc" }
+			}
+		},
+		"ih-cmd": {
+			"comment": "IH Command",
+			"match": "^(IH)(.*$)",
+			"captures": {
+				"1": { "name": "entity.name.function" },
+				"2": { "name": "string.unquoted.mvbase-proc"}
+			}
+		}
+	},
+	"scopeName": "source.mvbase-proc"
+}

@@ -1,0 +1,3 @@
+node_modules
+*.vsix
+proc_syntax.md
