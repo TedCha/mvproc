@@ -13,36 +13,51 @@
 		},
 		{
 			"include": "#labels"
+		},
+		{
+			"include": "#numbers"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#proc-bang"
 		}
 	],
 	"repository": {
 		"commands": {
 			"patterns": [
 			{ "include": "#a-cmd" },
+			{ "include": "#call-cmd"},
 			{ "include": "#d-cmd" },
 			{ "include": "#go-cmd" },
 			{ "include": "#h-cmd" },
 			{ "include": "#ih-cmd" },
 			{ "include": "#ip-cmd" },
 			{ "include": "#is-cmd" },
+			{ "include": "#link-cmd" },
 			{ "include": "#o-cmd" },
+			{ "include": "#p-cmd" },
 			{ "include": "#ri-cmd" },
 			{ "include": "#s-cmd" },
+			{ "include": "#t-cmd" },
 			{ "include": "#x-cmd"}
 		]
 		},
 		"nullary-commands": {
 			"comment": "Nullary Commands",
-			"match": "(B|BO|F|IT|RO|SP|SS|STOFF|ST OFF|STON|ST ON)$",
+			"match": "(?:^|(^\\d+) )(B|BO|F|IT|RO|SP|SS|STOFF|ST OFF|STON|ST ON)$",
 			"captures": {
-				"1": { "name": "entity.name.function" }
+				"1": { "name": "keyword.control.mvbase-proc"},
+				"2": { "name": "entity.name.function" }
 			}
 		},
 		"comments": {
 			"comment": "Line Comment",
-			"match": "(C.*$)",
+			"match": "(?:^|(^\\d+) )(C.*$)",
 			"captures": {
-				"1": { "name": "comment.line.mvbase-proc" }
+				"1": { "name": "keyword.control.mvbase-proc"},
+				"2": { "name": "comment.line.mvbase-proc" }
 			}
 		},
 		"labels": {
@@ -52,101 +67,178 @@
 				"1": { "name": "keyword.control.mvbase-proc"}
 			}
 		},
+		"numbers": {
+			"comment": "Numeric Constants",
+			"match": "(\\d+)",
+			"captures": {
+				"1": { "name": "constant.numeric.mvbase-proc" }
+			}
+		},
+		"strings": {
+			"comment": "Quoted Strings",
+			"match": "(\".*\")",
+			"captures": {
+				"1": { "name": "string.double.mvbase-proc" }
+			}
+		},
+		"proc-bang": {
+			"comment": "mvBase PROC Bang",
+			"match": "^(PQ)$",
+			"captures": {
+				"1": { "name": "constant.language.mvbase-proc" }
+			}
+		},
 		"a-cmd": {
 			"comment": "A Command",
-			"match": "(A)(\"|')?(\\d+)?(?:[^\\d])?((?<=,)\\d+)?",
+			"match": "(?:^|(^\\d+) )(A)(\"|')?(\\d+)?(?:[^\\d])?((?<=,)\\d+)?",
 			"captures": {
-				"1": { "name": "entity.name.function" },
-				"2": { "name": "keyword.other.mvbase-proc"},
-				"3": { "name": "variable.parameter.mvbase-proc"},
-				"4": { "name": "variable.other.mvbase-proc"}
+				"1": { "name": "keyword.control.mvbase-proc"},
+				"2": { "name": "entity.name.function" },
+				"3": { "name": "constant.character.mvbase-proc"},
+				"4": { "name": "variable.parameter.mvbase-proc"},
+				"5": { "name": "variable.other.mvbase-proc"}
+			}
+		},
+		"call-cmd": {
+			"comment": "Call Command ()",
+			"match": "[\\[](?:(DICT) )?(\\w+| )(?: (\\w+))?[\\]](?: (\\d+))?",
+			"captures": {
+				"1": { "name": "storage.type" },
+				"2": { "name": "string.unquoted.mvbase-proc" },
+				"3": { "name": "variable.parameter.mvbase-proc" },
+				"4": { "name": "keyword.control.mvbase-proc" }
 			}
 		},
 		"d-cmd": {
 			"comment": "D Command",
-			"match": "(D)(\\d+)?(?:[^\\d])?((?<=,)\\d+)?([+])?",
+			"match": "(?:^|(^\\d+) )(D)(\\d+)?(?:[^\\d])?((?<=,)\\d+)?([+])?",
 			"captures": {
-				"1": { "name": "entity.name.function" },
-				"2": { "name": "variable.parameter.mvbase-proc" },
-				"3": { "name": "variable.other.mvbase-proc" },
-				"4": { "name": "keyword.operator.mvbase-proc" }
+				"1": { "name": "keyword.control.mvbase-proc"},
+				"2": { "name": "entity.name.function" },
+				"3": { "name": "variable.parameter.mvbase-proc" },
+				"4": { "name": "variable.other.mvbase-proc" },
+				"5": { "name": "constant.character.mvbase-proc" }
 			}
 		},
 		"go-cmd": {
 			"comment": "GO/G Command",
-			"match": "(GO|G) (?:(\\d+)|(A)(\\d+)?)",
+			"match": "(?:^|(^\\d+) )(GO|G) (?:(\\d+)|(A)(\\d+)?)",
 			"captures": {
-				"1": { "name": "entity.name.function" },
-				"2": { "name": "keyword.control.mvbase-proc" },
-				"3": { "name": "entity.name.function" },
-				"4": { "name": "keyword.control.mvbase-proc" }
+				"1": { "name": "keyword.control.mvbase-proc"},
+				"2": { "name": "entity.name.function" },
+				"3": { "name": "keyword.control.mvbase-proc" },
+				"4": { "name": "entity.name.function" },
+				"5": { "name": "keyword.control.mvbase-proc" }
 			}
 		},
 		"h-cmd": {
 			"comment": "H Command",
-			"match": "(H)(.*?)(?:(?=[<]+$)|(?=$))(<$)?",
+			"match": "(?:^|(^\\d+) )(H)(.*?)(?:(?=[<]+$)|(?=$))(<$)?",
 			"captures": {
-				"1": { "name": "entity.name.function" },
-				"2": { "name": "string.unquoted.mvbase-proc"},
-				"3": { "name": "constant.language.mvbase-proc" }
+				"1": { "name": "keyword.control.mvbase-proc"},
+				"2": { "name": "entity.name.function" },
+				"3": { "name": "string.unquoted.mvbase-proc"},
+				"4": { "name": "constant.character.mvbase-proc" }
+			}
+		},
+		"if-cmd": {
+			"comment": "IF Command",
+			"match": "(?:^|(^\\d+) )(IF)",
+			"captures": {
+				"1": { "name": "keyword.control.mvbase-proc"},
+				"2": { "name": "entity.name.function" }
 			}
 		},
 		"ih-cmd": {
 			"comment": "IH Command",
-			"match": "(IH)(.*$)",
+			"match": "(?:^|(^\\d+) )(IH)(.*$)",
 			"captures": {
-				"1": { "name": "entity.name.function" },
-				"2": { "name": "string.unquoted.mvbase-proc"}
+				"1": { "name": "keyword.control.mvbase-proc"},
+				"2": { "name": "entity.name.function" },
+				"3": { "name": "string.unquoted.mvbase-proc"}
 			}
 		},
 		"ip-cmd": {
 			"comment": "IP Command",
-			"match": "(IP)(B)?(.)?$",
+			"match": "(?:^|(^\\d+) )(IP)(B)?(.)?$",
 			"captures": {
-				"1": { "name": "entity.name.function" },
-				"2": { "name": "variable.parameter.mvbase-proc" },
-				"3": { "name": "keyword.other.mvbase-proc"}
+				"1": { "name": "keyword.control.mvbase-proc"},
+				"2": { "name": "entity.name.function" },
+				"3": { "name": "variable.parameter.mvbase-proc" },
+				"4": { "name": "constant.character.mvbase-proc"}
 			}
 		},
 		"is-cmd": {
 			"comment": "IS Command",
-			"match": "(IS)(.)?$",
+			"match": "(?:^|(^\\d+) )(IS)(.)?$",
 			"captures": {
-				"1": { "name": "entity.name.function" },
-				"2": { "name": "keyword.other.mvbase-proc"}
+				"1": { "name": "keyword.control.mvbase-proc"},
+				"2": { "name": "entity.name.function" },
+				"3": { "name": "keyword.other.mvbase-proc"}
+			}
+		},
+		"link-cmd": {
+			"comment": "Link Command ()",
+			"match": "[(](?:(DICT) )?(\\w+)(?: (\\w+))?[)](?: (\\d+))?",
+			"captures": {
+				"1": { "name": "storage.type" },
+				"2": { "name": "string.unquoted.mvbase-proc" },
+				"3": { "name": "variable.parameter.mvbase-proc" },
+				"4": { "name": "keyword.control.mvbase-proc" }
 			}
 		},
 		"o-cmd": {
 			"comment": "O Command",
-			"match": "(O)(.*?)(?:(?=[+]+$)|(?=$))([+]$)?",
+			"match": "(?:^|(^\\d+) )(O)(.*?)(?:(?=[+]+$)|(?=$))([+]$)?",
 			"captures": {
-				"1": { "name": "entity.name.function" },
-				"2": { "name": "string.unquoted.mvbase-proc"},
-				"3": { "name": "constant.language.mvbase-proc" }
+				"1": { "name": "keyword.control.mvbase-proc"},
+				"2": { "name": "entity.name.function" },
+				"3": { "name": "string.unquoted.mvbase-proc"},
+				"4": { "name": "constant.language.mvbase-proc" }
+			}
+		},
+		"p-cmd": {
+			"comment": "P Command",
+			"match": "(?:^|(^\\d+) )(P)(?!Q)(H|P|W|X)?",
+			"captures": {
+				"1": { "name": "keyword.control.mvbase-proc"},
+				"2": { "name": "entity.name.function" },
+				"3": { "name": "variable.parameter.mvbase-proc" }
 			}
 		},
 		"ri-cmd": {
 			"comment": "RI Command",
-			"match": "(RI)(\\d+)?",
+			"match": "(?:^|(^\\d+) )(RI)(\\d+)?",
 			"captures": {
-				"1":{ "name": "entity.name.function" },
-				"2": { "name": "variable.parameter.mvbase-proc" }
+				"1": { "name": "keyword.control.mvbase-proc"},
+				"2":{ "name": "entity.name.function" },
+				"3": { "name": "variable.parameter.mvbase-proc" }
 			}
 		},
 		"s-cmd": {
 			"comment": "S Command",
-			"match": "(S)(\\d+)",
+			"match": "(?:^|(^\\d+) )(S)(\\d+)",
 			"captures": {
-				"1":{ "name": "entity.name.function" },
-				"2": { "name": "variable.parameter.mvbase-proc" }
+				"1": { "name": "keyword.control.mvbase-proc" },
+				"2":{ "name": "entity.name.function" },
+				"3": { "name": "variable.parameter.mvbase-proc" }
+			}
+		},
+		"t-cmd": {
+			"comment": "T Command",
+			"match": "(?:^|(^\\d+) )(T)",
+			"captures": {
+				"1": { "name": "keyword.control.mvbase-proc" },
+				"2": { "name": "string.unquoted.mvbase-proc" }
 			}
 		},
 		"x-cmd": {
 			"comment": "X Command",
-			"match": "(X)(.+)?",
+			"match": "(?:^|(^\\d+) )(X)(.+)?",
 			"captures": {
-				"1": { "name": "entity.name.function" },
-				"2": { "name": "string.unquoted.mvbase-proc"}
+				"1": { "name": "keyword.control.mvbase-proc"},
+				"2": { "name": "entity.name.function" },
+				"3": { "name": "string.unquoted.mvbase-proc"}
 			}
 		}
 	},
