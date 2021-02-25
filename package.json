@@ -2,12 +2,12 @@
     "name": "mvbase-proc-extension",
     "displayName": "mvBase PROC Extension",
     "description": "",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "publisher": "tcharts-boop",
     "repository": {
         "type": "git",
         "url": "https://github.com/tcharts-boop/mvbase-proc-extension"
-      },
+    },
     "engines": {
         "vscode": "^1.53.0"
     },
