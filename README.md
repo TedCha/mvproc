@@ -15,4 +15,12 @@ The mvBase PROC Extension will highlight the following:
 * Numeric Digits
 * PROC Identifier (PQ)
 
+### Demo
+
+Here is a small snippet of what the syntax highlighter currently looks like.
+
+<p float="left">
+  <img src="./image_assets/syntax_highlighter_demo.jpg"/>
+</p>
+
 Please raise any existing issues with this extension through [GitHub](https://github.com/tcharts-boop/mvbase-proc-extension/issues).
