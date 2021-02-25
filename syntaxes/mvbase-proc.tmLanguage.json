@@ -33,7 +33,7 @@
 		},
 		"nullary-commands": {
 			"comment": "Nullary Commands",
-			"match": "(B|BO|F|IT|RO|SP|SS|STOFF|ST OFF|STON|ST ON)$",
+			"match": "(?<!\\w)(B|BO|F|IT|RO|SP|SS|STOFF|ST OFF|STON|ST ON)$",
 			"captures": {
 				"1": { "name": "entity.name.function" }
 			}
@@ -76,7 +76,7 @@
 		},
 		"a-cmd": {
 			"comment": "A Command",
-			"match": "(A)(\"|')?(\\d+)?(?:[^\\d])?((?<=,)\\d+)?",
+			"match": "(?<!\\w)(A)(\"|')?(\\d+)?(?:[^\\d])?((?<=,)\\d+)?",
 			"captures": {
 				"1": { "name": "entity.name.function" },
 				"2": { "name": "constant.character.mvbase-proc" },
@@ -85,8 +85,8 @@
 			}
 		},
 		"call-cmd": {
-			"comment": "Call Command ()",
-			"match": "[\\[](?:(DICT) )?(\\w+| )(?: (\\w+))?[\\]](?: (\\d+))?",
+			"comment": "Call Command []",
+			"match": "(?<!\\w)[\\[](?:(DICT) )?([^ ]+| )(?: ([^ ]+))?[\\]](?: (\\d+))?",
 			"captures": {
 				"1": { "name": "storage.type" },
 				"2": { "name": "string.unquoted.mvbase-proc" },
@@ -96,7 +96,7 @@
 		},
 		"d-cmd": {
 			"comment": "D Command",
-			"match": "(D)(\\d+)?(?:[^\\d])?((?<=,)\\d+)?([+])?",
+			"match": "(?<!\\w)(D)(\\d+)?(?:[^\\d])?((?<=,)\\d+)?([+])?",
 			"captures": {
 				"1": { "name": "entity.name.function" },
 				"2": { "name": "variable.parameter.mvbase-proc" },
@@ -106,7 +106,7 @@
 		},
 		"go-cmd": {
 			"comment": "GO/G Command",
-			"match": "(GO|G)(?: (\\d+)| (A)(\\d+)?)?",
+			"match": "(?<!\\w)(GO|G)(?: (\\d+)| (A)(\\d+)?)?",
 			"captures": {
 				"1": { "name": "entity.name.function" },
 				"2": { "name": "keyword.control.mvbase-proc" },
@@ -116,7 +116,7 @@
 		},
 		"h-cmd": {
 			"comment": "H Command",
-			"match": "(H)(.*?)(?:(?=[<]+$)|(?=$))(<$)?",
+			"match": "(?<!\\w)(H)(.*?)(?:(?=[<]+$)|(?=$))(<$)?",
 			"captures": {
 				"1": { "name": "entity.name.function" },
 				"2": { "name": "string.unquoted.mvbase-proc"},
@@ -125,7 +125,7 @@
 		},
 		"if-cmd": {
 			"comment": "IF Command",
-			"match": "(IF)(?: (#)?)(?:(A)(\\d+)?(?:[^\\d]?(?<=,)(\\d+))?|(E)|(S))?(?: (<|>|=|#|\\[|\\])(?: (\\(?[^ ]+\\)?)))?",
+			"match": "(?<!\\w)(IF)(?: (#)?)(?:(A)(\\d+)?(?:[^\\d]?(?<=,)(\\d+))?|(E)|(S))?(?: (<|>|=|#|\\[|\\])(?: (\\(?[^ ]+\\)?)))?",
 			"captures": {
 				"1": { "name": "entity.name.function" },
 				"2": { "name": "constant.character.mvbase-proc" },
@@ -136,29 +136,11 @@
 				"7": { "name": "entity.name.function" },
 				"8": { "name": "constant.character.mvbase-proc"},
 				"9": { "name": "string.unquoted.mvbase-proc" }
-			},
-			"patterns": [
-				{ "include": "#call-cmd"},
-				{ "include": "#d-cmd" },
-				{ "include": "#go-cmd" },
-				{ "include": "#h-cmd" },
-				{ "include": "#if-cmd" },
-				{ "include": "#ih-cmd" },
-				{ "include": "#ip-cmd" },
-				{ "include": "#is-cmd" },
-				{ "include": "#link-cmd" },
-				{ "include": "#o-cmd" },
-				{ "include": "#p-cmd" },
-				{ "include": "#ri-cmd" },
-				{ "include": "#s-cmd" },
-				{ "include": "#t-cmd" },
-				{ "include": "#x-cmd"},
-				{ "include": "#nullary-commands" }
-			]
+			}
 		},
 		"ih-cmd": {
 			"comment": "IH Command",
-			"match": "(IH)(.*$)",
+			"match": "(?<!\\w)(IH)(.*$)",
 			"captures": {
 				"1": { "name": "entity.name.function" },
 				"2": { "name": "string.unquoted.mvbase-proc"}
@@ -166,7 +148,7 @@
 		},
 		"ip-cmd": {
 			"comment": "IP Command",
-			"match": "(IP)(B)?(.)?$",
+			"match": "(?<!\\w)(IP)(B)?(.)?$",
 			"captures": {
 				"1": { "name": "entity.name.function" },
 				"2": { "name": "variable.parameter.mvbase-proc" },
@@ -175,7 +157,7 @@
 		},
 		"is-cmd": {
 			"comment": "IS Command",
-			"match": "(IS)(.)?$",
+			"match": "(?<!\\w)(IS)(.)?$",
 			"captures": {
 				"1": { "name": "entity.name.function" },
 				"2": { "name": "keyword.other.mvbase-proc"}
@@ -183,7 +165,7 @@
 		},
 		"link-cmd": {
 			"comment": "Link Command ()",
-			"match": "[(](?:(DICT) )?(\\w+)(?: (\\w+))?[)](?: (\\d+))?",
+			"match": "(?<!\\w)[(](?:(DICT) )?([^ ,]+)(?: ([^ ,]+))?[)](?: (\\d+))?",
 			"captures": {
 				"1": { "name": "storage.type" },
 				"2": { "name": "string.unquoted.mvbase-proc" },
@@ -193,7 +175,7 @@
 		},
 		"o-cmd": {
 			"comment": "O Command",
-			"match": "((?<!G)O)(.*?)(?:(?=[+]+$)|(?=$))([+]$)?",
+			"match": "(?<!\\w)(O)(.*?)(?:(?=[+]+$)|(?=$))([+]$)?",
 			"captures": {
 				"1": { "name": "entity.name.function" },
 				"2": { "name": "string.unquoted.mvbase-proc"},
@@ -202,7 +184,7 @@
 		},
 		"p-cmd": {
 			"comment": "P Command",
-			"match": "(P)(?!Q)(H|P|W|X)?",
+			"match": "(?<!\\w)(P)(?!Q)(H|P|W|X)?",
 			"captures": {
 				"1": { "name": "entity.name.function" },
 				"2": { "name": "variable.parameter.mvbase-proc" }
@@ -210,7 +192,7 @@
 		},
 		"ri-cmd": {
 			"comment": "RI Command",
-			"match": "(RI)(\\d+)?",
+			"match": "(?<!\\w)(RI)(\\d+)?",
 			"captures": {
 				"1":{ "name": "entity.name.function" },
 				"2": { "name": "variable.parameter.mvbase-proc" }
@@ -218,7 +200,7 @@
 		},
 		"s-cmd": {
 			"comment": "S Command",
-			"match": "(S)(\\d+)",
+			"match": "(?<!\\w)(S)(\\d+)",
 			"captures": {
 				"1":{ "name": "entity.name.function" },
 				"2": { "name": "variable.parameter.mvbase-proc" }
@@ -226,14 +208,14 @@
 		},
 		"t-cmd": {
 			"comment": "T Command",
-			"match": "(T)",
+			"match": "(?<!\\w)(T)",
 			"captures": {
-				"1": { "name": "string.unquoted.mvbase-proc" }
+				"1": { "name": "entity.name.function"}
 			}
 		},
 		"x-cmd": {
 			"comment": "X Command",
-			"match": "(X)(.+)?",
+			"match": "(?<!\\w)(X)(.+)?",
 			"captures": {
 				"1": { "name": "entity.name.function" },
 				"2": { "name": "string.unquoted.mvbase-proc"}
