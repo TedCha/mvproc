@@ -40,7 +40,7 @@
 		},
 		"comments": {
 			"comment": "Line Comment",
-			"match": "^(C.*$)",
+			"match": "(?<!\\w)(C.*$)",
 			"captures": {
 				"1": { "name": "comment.line.mvbase-proc" }
 			}
@@ -125,7 +125,7 @@
 		},
 		"if-cmd": {
 			"comment": "IF Command",
-			"match": "(?<!\\w)(IF)(?: (#)?)(?:(A)(\\d+)?(?:[^\\d]?(?<=,)(\\d+))?|(E)|(S))?(?: (<|>|=|#|\\[|\\])(?: (\\(?[^ ]+\\)?)))?",
+			"match": "(?<!\\w)(IF)(?: (#)?)(?:(A)(\\d+)?(?:[^\\d]?(?<=,)(\\d+))?|(E)|(S))?(?:[ ]?(<|>|=|#|\\[|\\])(?:[ ]?(\\(?[^ ]+\\)?)))?",
 			"captures": {
 				"1": { "name": "entity.name.function" },
 				"2": { "name": "constant.character.mvbase-proc" },
@@ -208,9 +208,10 @@
 		},
 		"t-cmd": {
 			"comment": "T Command",
-			"match": "(?<!\\w)(T)",
+			"match": "(?<!\\w)(T)(?:,(B|C))?",
 			"captures": {
-				"1": { "name": "entity.name.function"}
+				"1": { "name": "entity.name.function" },
+				"2": { "name": "variable.parameter.mvbase-proc" }
 			}
 		},
 		"x-cmd": {
