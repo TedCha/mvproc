@@ -1,0 +1,59 @@
+{
+    "Language": "MultiValue PROC",
+    "Keywords": [
+        {
+            "key": "A",
+            "regexMatch": "(?<!\\w)(A)(\"|')?(\\d+)?(?:[^\\d])?((?<=,)\\d+)?",
+            "documentation": "Copy a field from the input buffer to the output buffer.\n***\n",
+            "detail": "A [*surround-char*] [*parameter#*] [*,#characters*]"
+        },
+        {
+            "key": "B",
+            "regexMatch": "(?:^|IF.*)(B)$",
+            "documentation": "Move the input buffer pointer backward to the previous field.\n***\n",
+            "detail": "B"
+        },
+        {
+            "key": "BO",
+            "regexMatch": "(?:^|IF.*)(BO)$",
+            "documentation": "Move the output buffer pointer back to the end of the previous field, discarding the characters it moves over.\n***\n",
+            "detail": "BO"
+        },
+        {
+            "key": "C",
+            "regexMatch": "(?<!\\w)(C.*$)",
+            "documentation": "Enter a comment.\n***\n",
+            "detail": "C [*text*]"
+        },
+        {
+            "key": "D",
+            "regexMatch": "(?<!\\w)(D)(\\d+)?(?:[^\\d])?((?<=,)\\d+)?([+])?",
+            "documentation": "Display one or more fields from the active input buffer.\n***\n",
+            "detail": "D [*reference#* | *parameter#*] [*,#characters*] [*+*]"
+        },
+        {
+            "key": "F",
+            "regexMatch": "(?:^|IF.*)(F)$",
+            "documentation": "Move the input buffer pointer forward to the next field mark in the buffer.\n***\n",
+            "detail": "F"
+        },
+        {
+            "key": "GO",
+            "regexMatch": "(?<!\\w)(GO|G|GOTO)(?: (\\d+)| (A)(\\d+)?)?",
+            "documentation": "Move the input buffer pointer forward to the next field mark in the buffer.\n***\n",
+            "detail": "GO|G|GOTO {*label#* | A [*parameter#]*}"
+        },
+        {
+            "key": "H",
+            "regexMatch": "(?<!\\w)(H)(.*?)(?:(?=[<]+$)|(?=$))(<$)?",
+            "documentation": "Adds a string of text to the end of the active output buffer, and positions the pointer at the end of the string.\n***\n",
+            "detail": "H [*text*] [<]"
+        },
+        {
+            "key": "IF",
+            "regexMatch": "(?<!\\w)(IF)(?: (#)?)?(?:(A)(\\d+)?(?:[^\\d]?(?<=,)(\\d+))?|(E)|(S))?(?:[ ]?(<|>|=|#|\\[|\\])(?:[ ]?(\\(?[^ ]+\\)?)))?",
+            "documentation": "evaluates a condition and, if it is true, executes the specified PROC command.\n***\n",
+            "detail": "IF *condition* *command*"
+        }
+    ]
+}
