@@ -1,70 +1,42 @@
-# mvproc README
+# mvbase-proc-extension
 
-This is the README for your extension "mvproc". After writing up a brief description, we recommend including the following sections.
+## Syntax Highlighter
 
-## Features
+The syntax highlighter is the main feature of the VSCode mvBase Proc Extension. It provides developers who use the language a better way to update existing programs or develop new programs in the mvBase PROC language.
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+### Features
 
-For example if there is an image subfolder under your extension project workspace:
+The mvBase PROC Extension will highlight the following:
+* Commands (A, H, RO, IF, STOFF, etc.)
+* Command Parameters
+* Labels
+* Unquoted and Quoted Strings
+* Comments
+* Numeric Digits
+* PROC Identifier (PQ)
 
-\!\[feature X\]\(images/feature-x.png\)
+### Demo
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+Here is a small snippet of what the syntax highlighter currently looks like.
 
-## Requirements
+<p float="left">
+  <img src="./image_assets/syntax_highlighter_demo.jpg"/>
+</p>
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+### Use
 
-## Extension Settings
+The mvBase PROC Syntax Highlighter can be activated in two ways:
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+1. Changing the file extension to `.proc`. VSCode will automatically recognize that a file needs to be interpreted by the mvBase Proc Syntax Highlighter if it has a `.proc` file extension.
+2. Use the Command Palette (Ctrl+Shift+P) to select **Change Language Mode**. From there you can select mvBase PROC as the language for the file.
 
-For example:
+### Notes
 
-This extension contributes the following settings:
+The theme works best with Monakai Dimmed or Dark+.
 
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
+### Coming Soon
 
-## Known Issues
+* Code Snippets with detailed documentation!
+* PROC User Exits
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
------------------------------------------------------------------------------------------------------------
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+Please raise any existing issues with this extension through [GitHub](https://github.com/tcharts-boop/mvbase-proc-extension/issues).
