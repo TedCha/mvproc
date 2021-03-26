@@ -14,11 +14,13 @@ export function activate(context: vscode.ExtensionContext) {
 
 			let matchedKeyword = languageKeywordList[validKeywordIndex];
 
+			let keywordHeader: string = `**${matchedKeyword.key}**\n***\n`;
 			let keywordDocumentation: string = matchedKeyword.documentation;
-			let keywordDetail: string = matchedKeyword.detail;
-
+			let keywordDetail: string = `\n***\n${matchedKeyword.detail}`;
+			
 			const contents = new vscode.MarkdownString;
-
+			
+			contents.appendMarkdown(keywordHeader);
 			contents.appendMarkdown(keywordDocumentation);
 			contents.appendMarkdown(keywordDetail);
 			

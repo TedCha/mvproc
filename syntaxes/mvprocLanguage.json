@@ -3,57 +3,147 @@
     "Keywords": [
         {
             "key": "A",
-            "regexMatch": "(?<!\\w)(A)(\"|')?(\\d+)?(?:[^\\d])?((?<=,)\\d+)?",
-            "documentation": "Copy a field from the input buffer to the output buffer.\n***\n",
+            "regexMatch": "(?<!\\w)(A)(?:\"|')?(?:\\d+)?(?:[^\\d])?(?:(?<=,)\\d+)?",
+            "documentation": "Copies a parameter from the active input buffer to the active output buffer. The parameter remains in the input buffer.",
             "detail": "A [*surround-char*] [*parameter#*] [*,#characters*]"
         },
         {
             "key": "B",
-            "regexMatch": "(?:^|IF.*)(B)$",
-            "documentation": "Move the input buffer pointer backward to the previous field.\n***\n",
+            "regexMatch": "(?<!\\w)(B)$",
+            "documentation": "Moves the pointer for the currently active input buffer backward to the first character of the previous parameter.",
             "detail": "B"
         },
         {
             "key": "BO",
-            "regexMatch": "(?:^|IF.*)(BO)$",
-            "documentation": "Move the output buffer pointer back to the end of the previous field, discarding the characters it moves over.\n***\n",
+            "regexMatch": "(?<!\\w)(BO)$",
+            "documentation": "Moves the output buffer pointer back to the end of the previous field, discarding the characters it moves over.",
             "detail": "BO"
         },
         {
             "key": "C",
             "regexMatch": "(?<!\\w)(C.*$)",
-            "documentation": "Enter a comment.\n***\n",
+            "documentation": "Specifies a comment line.",
             "detail": "C [*text*]"
         },
         {
             "key": "D",
             "regexMatch": "(?<!\\w)(D)(\\d+)?(?:[^\\d])?((?<=,)\\d+)?([+])?",
-            "documentation": "Display one or more fields from the active input buffer.\n***\n",
+            "documentation": "Displays one or more fields from the active input buffer.",
             "detail": "D [*reference#* | *parameter#*] [*,#characters*] [*+*]"
         },
         {
             "key": "F",
-            "regexMatch": "(?:^|IF.*)(F)$",
-            "documentation": "Move the input buffer pointer forward to the next field mark in the buffer.\n***\n",
+            "regexMatch": "(?<!\\w)(F)$",
+            "documentation": "Moves the input buffer pointer forward to the next parameter in the active input buffer.",
             "detail": "F"
         },
         {
             "key": "GO",
             "regexMatch": "(?<!\\w)(GO|G|GOTO)(?: (\\d+)| (A)(\\d+)?)?",
-            "documentation": "Move the input buffer pointer forward to the next field mark in the buffer.\n***\n",
-            "detail": "GO|G|GOTO {*label#* | A [*parameter#]*}"
+            "documentation": "Transfers control to another command within a PROC, and continues to execute from that command.",
+            "detail": "GOTO|GO|G {*label#* | A [*parameter#*]}"
         },
         {
             "key": "H",
             "regexMatch": "(?<!\\w)(H)(.*?)(?:(?=[<]+$)|(?=$))(<$)?",
-            "documentation": "Adds a string of text to the end of the active output buffer, and positions the pointer at the end of the string.\n***\n",
+            "documentation": "Adds a string of text to the end of the active output buffer, and positions the pointer at the end of the string.",
             "detail": "H [*text*] [<]"
         },
         {
             "key": "IF",
-            "regexMatch": "(?<!\\w)(IF)(?: (#)?)?(?:(A)(\\d+)?(?:[^\\d]?(?<=,)(\\d+))?|(E)|(S))?(?:[ ]?(<|>|=|#|\\[|\\])(?:[ ]?(\\(?[^ ]+\\)?)))?",
-            "documentation": "evaluates a condition and, if it is true, executes the specified PROC command.\n***\n",
+            "regexMatch": "(?<!\\w)(IF)",
+            "documentation": "Evaluates a condition and, if it is true, executes the specified PROC command. \nIf the command is false, the PROC command does not execute.\n***\n",
             "detail": "IF *condition* *command*"
+        },
+        {
+            "key": "IH",
+            "regexMatch": "(?<!\\w)(IH)$",
+            "documentation": "Replaces the current parameter in the active input buffer with specified text.",
+            "detail": "IH *text*"
+        },
+        {
+            "key": "IP",
+            "regexMatch": "(?<!\\w)(IP)(B)?(.)?$",
+            "documentation": "Reads input from the terminal and places it in the active input buffer at the position specified by the input buffer pointer.",
+            "detail": "IP [B] [*character*]"
+        },
+        {
+            "key": "IS",
+            "regexMatch": "(?<!\\w)(IS)(.)?$",
+            "documentation": "Reads input from the terminal and places it in the secondary input buffer, replacing the current contents.",
+            "detail": "IS [*character*]"
+        },
+        {
+            "key": "IT",
+            "regexMatch": "(?<!\\w)(IT)$",
+            "documentation": "Reads a backup medium label from an attached backup medium into the primary input buffer.",
+            "detail": "IT"
+        },
+        {
+            "key": "O",
+            "regexMatch": "(?<!\\w)(O)(.*?)(?:(?=[+]+$)|(?=$))([+]$)?",
+            "documentation": "Outputs a string of text to the terminal, followed by a carriage return.",
+            "detail": "O *text* [+]"
+        },
+        {
+            "key": "P",
+            "regexMatch": "(?<!\\w)(P)(?!Q)(H|P|W|X)?",
+            "documentation": "Submits the command constructed in the primary output buffer to the TCL command processor.",
+            "detail": "P [H | P | W | X]"
+        },
+        {
+            "key": "RI",
+            "regexMatch": "(?<!\\w)(RI)(\\d+)?",
+            "documentation": "Clears both input buffers and makes the primary input buffer active. The command can also be used to clear only a portion of the primary input buffer.",
+            "detail": "RI [*parameter#*]"
+        },
+        {
+            "key": "RO",
+            "regexMatch": "(?<!\\w)(RO)$",
+            "documentation": "Clears both output buffers and makes the primary output buffer active.",
+            "detail": "RO"
+        },
+        {
+            "key": "S",
+            "regexMatch": "(?<!\\w)(S)(\\d+)",
+            "documentation": "Sets the input buffer pointer for the currently active input buffer.",
+            "detail": "S *parameter#*"
+        },
+        {
+            "key": "SP",
+            "regexMatch": "(?<!\\w)(SP)$",
+            "documentation": "Selects the primary input buffer as the active input buffer, and positions the pointer at the beginning of the buffer.",
+            "detail": "SP"
+        },
+        {
+            "key": "SS",
+            "regexMatch": "(?<!\\w)(SS)$",
+            "documentation": "Selects the secondary input buffer as the currently active input buffer, and positions the pointer at the beginning of the buffer.",
+            "detail": "SS"
+        },
+        {
+            "key": "STOFF",
+            "regexMatch": "(?<!\\w)(STOFF|ST OFF)$",
+            "documentation": "Turns off the stack, or secondary output buffer, and makes the primary output buffer active.",
+            "detail": "STOFF|ST OFF"
+        },
+        {
+            "key": "STON",
+            "regexMatch": "(?<!\\w)(STON|ST ON)$",
+            "documentation": "Makes the secondary output buffer, or stack, active. The stack holds responses for an interactive processor such as mvBASIC or the Editor.",
+            "detail": "STON|ST ON"
+        },
+        {
+            "key": "T",
+            "regexMatch": "(?<!\\w)(T)(?:,(B|C))?",
+            "documentation": "Formats the display of output on the terminal screen.",
+            "detail": "T *option* [*,option…*]"
+        },
+        {
+            "key": "X",
+            "regexMatch": "(?<!\\w)(X)(.+)?",
+            "documentation": "Terminates a Proc and returns control to TCL. The X command also marks the end of a local or external subroutine defined with the [ ] (call) command.",
+            "detail": "X [*text*]"
         }
     ]
 }

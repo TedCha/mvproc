@@ -2,8 +2,14 @@
 
 All notable changes to the "mvproc" extension will be documented in this file.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+## 0.2.0
+* Intial Release
+* Features:
+    * Syntax Highlighting
+    * File Extension Activation
 
-## [Unreleased]
-
-- Initial release
+## 1.0.0 (Current Dev Version)
+* Features:
+    * Conversion from Grammar to Extension
+    * Hover Command Documentation
+    * User Exits Syntax Highlighting
