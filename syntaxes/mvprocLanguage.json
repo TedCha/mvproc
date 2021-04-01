@@ -1,27 +1,27 @@
 {
-    "Language": "MultiValue PROC",
-    "Keywords": [
+    "language": "MultiValue PROC",
+    "keywords": [
         {
             "key": "A",
-            "regexMatch": "(?<!\\w)(A)(?:\"|')?(?:\\d+)?(?:[^\\d])?(?:(?<=,)\\d+)?",
+            "regexMatch": "\\bA(?:\"|')?(?:\\d+)?(?:,\\d+)?\\b",
             "documentation": "Copies a parameter from the active input buffer to the active output buffer. The parameter remains in the input buffer.",
             "detail": "A [*surround-char*] [*parameter#*] [*,#characters*]"
         },
         {
             "key": "B",
-            "regexMatch": "(?<!\\w)(B)$",
+            "regexMatch": "\\bB\\b$",
             "documentation": "Moves the pointer for the currently active input buffer backward to the first character of the previous parameter.",
             "detail": "B"
         },
         {
             "key": "BO",
-            "regexMatch": "(?<!\\w)(BO)$",
+            "regexMatch": "\\bBO\\b$",
             "documentation": "Moves the output buffer pointer back to the end of the previous field, discarding the characters it moves over.",
             "detail": "BO"
         },
         {
             "key": "C",
-            "regexMatch": "(?<!\\w)(C.*$)",
+            "regexMatch": "\\b(C.*)\\b$",
             "documentation": "Specifies a comment line.",
             "detail": "C [*text*]"
         },
@@ -45,7 +45,7 @@
         },
         {
             "key": "H",
-            "regexMatch": "(?<!\\w)(H)(.*?)(?:(?=[<]+$)|(?=$))(<$)?",
+            "regexMatch": "\\b(?<!\\w)(H)(.*?)(?:(?=[<]+$)|(?=$))\b(<$\\B)?",
             "documentation": "Adds a string of text to the end of the active output buffer, and positions the pointer at the end of the string.",
             "detail": "H [*text*] [<]"
         },
@@ -144,6 +144,12 @@
             "regexMatch": "(?<!\\w)(X)(.+)?",
             "documentation": "Terminates a Proc and returns control to TCL. The X command also marks the end of a local or external subroutine defined with the [ ] (call) command.",
             "detail": "X [*text*]"
+        },
+        {
+            "key": "Link Command ()",
+            "regexMatch": "(?<!\\w)[(](?:(DICT) )?([^ ,]+)(?: ([^ ,]+))?[)](?: (\\d+))?",
+            "documentation": "Transfers control from one PROC to another PROC.",
+            "detail": "([DICT] filename [*item-ID*]) [*label#*]"
         }
     ]
 }

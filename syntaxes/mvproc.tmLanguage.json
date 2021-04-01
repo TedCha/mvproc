@@ -33,21 +33,21 @@
 		},
 		"nullary-commands": {
 			"comment": "Nullary Commands",
-			"match": "(?<!\\w)(B|BO|F|IT|RO|SP|SS|STOFF|ST OFF|STON|ST ON)$",
+			"match": "(?:^[^HOX]*\\b)(B|BO|F|IT|RO|SP|SS|STOFF|ST OFF|STON|ST ON)\\b",
 			"captures": {
 				"1": { "name": "entity.name.function.mvproc" }
 			}
 		},
 		"comments": {
 			"comment": "Line Comment",
-			"match": "(?<!\\w)(C.*$)",
+			"match": "\\b(C.*)$",
 			"captures": {
 				"1": { "name": "comment.line.mvproc" }
 			}
 		},
 		"labels": {
 			"comment": "Numeric Label",
-			"match": "^(\\d+)",
+			"match": "^(\\d+)\\b",
 			"captures": {
 				"1": { "name": "keyword.control.mvproc"}
 			}
@@ -76,7 +76,7 @@
 		},
 		"a-cmd": {
 			"comment": "A Command",
-			"match": "(?<!\\w)(A)(\"|')?(\\d+)?(?:[^\\d])?((?<=,)\\d+)?",
+			"match": "\\b(A)(\"|')?(\\d+)?(?:,(\\d+))?\\b",
 			"captures": {
 				"1": { "name": "entity.name.function.mvproc" },
 				"2": { "name": "constant.character.mvproc" },
@@ -86,7 +86,7 @@
 		},
 		"call-cmd": {
 			"comment": "Call Command []",
-			"match": "(?<!\\w)[\\[](?:(DICT) )?([^ ]+| )(?: ([^ ]+))?[\\]](?: (\\d+))?",
+			"match": "\\B[\\[](?:(DICT) )?([^ ]+| )(?: ([^ ]+))?[\\]](?: (\\d+))?\\B",
 			"captures": {
 				"1": { "name": "storage.type" },
 				"2": { "name": "string.unquoted.mvproc" },
@@ -96,7 +96,7 @@
 		},
 		"d-cmd": {
 			"comment": "D Command",
-			"match": "(?<!\\w)(D)(\\d+)?(?:[^\\d])?((?<=,)\\d+)?([+])?",
+			"match": "\\b(D)(\\d+)?(?:,(\\d+))?([+])?\\B",
 			"captures": {
 				"1": { "name": "entity.name.function.mvproc" },
 				"2": { "name": "variable.parameter.mvproc" },
