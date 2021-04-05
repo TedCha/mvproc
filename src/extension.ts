@@ -3,7 +3,6 @@ import * as languageDefinitionFile from '../syntaxes/mvprocLanguage.json';
 
 interface KeywordObject {
 	key: string;
-	regexMatch: string;
 	documentation: string;
 	detail: string;
 }
@@ -13,24 +12,64 @@ interface LanguageDefinition {
 	keywords: KeywordObject[];
 }
 
-function parseTextLineForMatch(tokenizedText: string[], languageKeywordList: KeywordObject[]): KeywordObject {
+function parseTextLineForMatch(
+	activeHoverTokenText: string,
+	activeHoverLineText: string,
+	languageKeywordList: KeywordObject[],
+	currentPosition: vscode.Position): KeywordObject | undefined {
 
-	let matchedKeywordIndex: number = 0;
-	let firstToken: string = tokenizedText[0];
-	let tokenIsNumeric: boolean = /^\d+$/.test(firstToken);
-	let tokenIsFlowControlCommand: boolean = /^(?:IF|GOTO|GO|G)$/.test(firstToken);
+		let tokenizedText: string[] = activeHoverLineText.split(" ");
 
-	if (tokenIsNumeric || tokenIsFlowControlCommand) {
-		// TODO - Numeric Label Processing and Flow Control Command Processing
-	} else {
-		matchedKeywordIndex = languageKeywordList.findIndex(
-			(keyword: KeywordObject) => firstToken.match(`^${keyword.key}`) !== null
-		);
-	}
+		let matchedKeywordIndex: number = 0;
+		let firstTokenText: string = tokenizedText[0];
 
-	let matchedKeyword = languageKeywordList[matchedKeywordIndex];
+		let firstTokenIsNumericLabel: boolean = /^\d+$/.test(firstTokenText);
+		let activeTokenIsNumericLabel: boolean = /^\d+$/.test(activeHoverTokenText);
 
-	return matchedKeyword;
+		let firstTokenIsFlowControlKeyword: boolean = /^(?:IF|GOTO|GO|G)$/.test(firstTokenText);
+		let activeTokenIsFlowControlKeyword: boolean = /^(?:IF|GOTO|GO|G)$/.test(activeHoverTokenText);
+
+		let ifExpressionRegex = /IF(?: #? ?)?(?:A(?:\d+)?(?:[^\d]?(?<=,)(?:\d+))?|E|S)?(?:[ ]?(?:<|>|=|#|\[|\])(?:[ ]?(?:\(?[^\s]+\)?)))?\s?/;
+
+		if (firstTokenIsNumericLabel || firstTokenIsFlowControlKeyword) {
+			
+			// Test if first token is a Label and if first token matches active token
+			if (/^\d+$/.test(firstTokenText) && firstTokenText === activeHoverTokenText) {
+				let labelKeywordObject: KeywordObject = {
+					key: "Label",
+					documentation: "A number specifying a labelled PROC statement.",
+					detail: "*number*"
+				};
+
+				return labelKeywordObject;
+			}
+
+			// Test if first token is a Label and if first token does not match active token
+			if (/^\d+$/.test(firstTokenText) && firstTokenText !== activeHoverTokenText) {
+				firstTokenText = tokenizedText[1];
+				console.log(`New firstTokenText = ${firstTokenText}`);
+			}
+
+			// Test if first token is a IF Keyword and that it does not match the active token
+			if (/^(?:IF)$/.test(firstTokenText) && firstTokenText !== activeHoverTokenText) {
+				let ifExpressionText: RegExpMatchArray | null = activeHoverLineText.match(ifExpressionRegex);
+				console.log(ifExpressionText);
+				// TODO - Add logic to switch the firstTokenText to the first keyword of the non-match text
+			}
+
+			// TODO - Add logic to handle other flow control keywords (GO|G|GOTO)
+		}
+
+		if (firstTokenText === activeHoverTokenText) {
+			matchedKeywordIndex = languageKeywordList.findIndex(
+				(keyword: KeywordObject) => activeHoverTokenText.match(`^${keyword.key}`) !== null
+			);
+
+			return languageKeywordList[matchedKeywordIndex];
+		}
+
+		return undefined;
+		
 }
 
 export function activate(context: vscode.ExtensionContext) {
@@ -46,6 +85,7 @@ export function activate(context: vscode.ExtensionContext) {
 		languageDefinition = languageDefinitionFile;
 		languageKeywordList = languageDefinition.keywords;
 
+		// Sort the Language Keyword List by keyword length (Descending)
 		languageKeywordList.sort((a, b) => {
 			return b.key.length - a.key.length;
 		});
@@ -58,13 +98,42 @@ export function activate(context: vscode.ExtensionContext) {
 	languageKeywordList = cachedLanguageKeywordList;
 
 	let disposable: vscode.Disposable = vscode.languages.registerHoverProvider('mvproc', {
-		provideHover(document: vscode.TextDocument, position : vscode.Position) {
-			let activeHoverLine: vscode.TextLine = document.lineAt(position);
+		provideHover(document: vscode.TextDocument, currentPosition : vscode.Position) {
+			let activeHoverTokenRange: vscode.Range | undefined = document.getWordRangeAtPosition(currentPosition, /\S+/);
+
+			if (activeHoverTokenRange === undefined) {
+				return undefined;
+			}
+
+			let activeHoverTokenText: string = document.getText(activeHoverTokenRange);
+
+			let activeHoverLine: vscode.TextLine = document.lineAt(currentPosition);
 			let activeHoverLineText: string = activeHoverLine.text;
 
-			let tokenizedTextLine: string[] = activeHoverLineText.split(" ");
+			// let startTokenCharPosition: number = activeHoverLineText.indexOf(activeHoverTokenText);
+			// let startTokenPosition: vscode.Position = new vscode.Position(currentPosition.line, startTokenCharPosition);
 
-			let matchedKeyword: KeywordObject = parseTextLineForMatch(tokenizedTextLine, languageKeywordList);
+			// let endTokenCharPosition: number = startTokenCharPosition + activeHoverTokenText.length;
+			// let endTokenPosition: vscode.Position = new vscode.Position(currentPosition.line, endTokenCharPosition);
+
+			// let tokenRange: vscode.Range = new vscode.Range(startTokenPosition, endTokenPosition);
+
+			// let tokenText: string = document.getText(tokenRange);
+
+			// console.log(tokenText);
+
+			let parseMatchResult: KeywordObject | undefined = parseTextLineForMatch(
+				activeHoverTokenText,
+				activeHoverLineText,
+				languageKeywordList,
+				currentPosition
+				);
+			
+			if (parseMatchResult === undefined) {
+				return undefined;
+			}
+
+			let matchedKeyword: KeywordObject = parseMatchResult;
 
 			let keywordHeader: string = `**${matchedKeyword.key}**\n***\n`;
 			let keywordDocumentation: string = matchedKeyword.documentation;
