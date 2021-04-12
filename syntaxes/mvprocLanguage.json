@@ -122,9 +122,19 @@
             "detail": "X [*text*]"
         },
         {
-            "key": "Test Command",
-            "documentation": "This command is just a test.",
-            "detail": "This should never appear in production."
+            "key": "Statement Label",
+		    "documentation": "A number specifying a labelled PROC statement.",
+		    "detail": "*number*"
+        },
+        {
+            "key":"IF E Condition",
+            "documentation": "Evaluates an error condition returned by a command that the UniVerse command processor executes. E must be used after a P command.",
+            "detail": "IF [#] E [[*rel-op*] *error*] *command*"
+        },
+        {
+            "key":"IF S Condition",
+            "documentation": "Tests whether an active select list is available for processing. It is evaluated as true only if a SELECT or SSELECT sentence was executed by the UniVerse command processor.",
+            "detail": "IF [#] S *command*"
         }
     ]
 }
