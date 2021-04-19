@@ -135,6 +135,16 @@
             "key":"IF S Condition",
             "documentation": "Tests whether an active select list is available for processing. It is evaluated as true only if a SELECT or SSELECT sentence was executed by the UniVerse command processor.",
             "detail": "IF [#] S *command*"
+        },
+        {
+            "key":"() Link Command",
+            "documentation": "Transfers control from one PROC to another PROC.",
+            "detail": "([DICT] *filename* [*item-id*]) [*label#*]"
+        },
+        {
+            "key":"[] Call Command",
+            "documentation": "Transfers control to an external subroutine.",
+            "detail": "[[DICT] *filename* [*item-id*]] [*label#*]"
         }
     ]
 }

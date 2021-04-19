@@ -29,7 +29,7 @@ Syntax Highlighter Demo:
 
 Keyword Documentation Hover Provider Demo:
 
-[//]: # (TODO - Add demo image of the hover provider.)
+* (TODO - Add demo image of the hover provider.)
 
 ### Use
 
