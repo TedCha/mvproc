@@ -2,7 +2,7 @@
   "name": "mvbase-proc-extension",
   "displayName": "MultiValue PROC",
   "description": "",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "publisher": "tcharts-boop",
   "engines": {
     "vscode": "^1.46.0"
@@ -44,11 +44,10 @@
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./",
+    "compile": "tsc -b -v",
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
-    "lint": "eslint src --ext ts",
-    "test": "node ./out/test/runTest.js"
+    "lint": "eslint src --ext ts"
   },
   "devDependencies": {
     "@types/glob": "^7.1.3",
