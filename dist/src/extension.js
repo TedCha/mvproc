@@ -51,6 +51,9 @@ function parseTextLineForMatch(activeHoverTokenText, activeHoverLineText, positi
     let matchHoverLineText = activeHoverLineText;
     // represents interpreted hover character position while processing
     let activeCharPosition = position.character;
+    if (/^PQ$/.test(activeHoverLineText)) {
+        return getKeywordObject("PROC Bang");
+    }
     if (firstTokenIsLabel || firstTokenIsFlowControlKeyword) {
         // Test if first token is a Label and if first token matches active token
         if (/^\d+$/.test(matchTokenText) && matchTokenText === activeHoverTokenText) {
@@ -98,7 +101,6 @@ function parseTextLineForMatch(activeHoverTokenText, activeHoverLineText, positi
     if (/\B[\[](?:DICT )?[^ ]+(?: [^ ]+)?[\]](?: \d+)?/.test(matchHoverLineText)) {
         return getKeywordObject("[] Call Command");
     }
-    console.log(matchHoverLineText);
     if (matchTokenText === activeHoverTokenText) {
         matchedKeywordIndex = languageKeywordList.findIndex((keyword) => activeHoverTokenText.match(`^${keyword.key}`) !== null);
         return languageKeywordList[matchedKeywordIndex];

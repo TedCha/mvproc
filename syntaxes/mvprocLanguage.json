@@ -145,6 +145,11 @@
             "key":"[] Call Command",
             "documentation": "Transfers control to an external subroutine.",
             "detail": "[[DICT] *filename* [*item-id*]] [*label#*]"
+        },
+        {
+            "key":"PROC Bang",
+            "documentation": "PQ identifies the file as a PROC, and tells the system that it needs to be handled by the PROC processor.",
+            "detail": "PQ"
         }
     ]
 }
