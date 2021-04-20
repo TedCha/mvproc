@@ -142,6 +142,8 @@ function parseTextLineForMatch(activeHoverTokenText: string, activeHoverLineText
 		return getKeywordObject("[] Call Command");
 	}
 
+	console.log(matchHoverLineText);
+
 	if (matchTokenText === activeHoverTokenText) {
 		matchedKeywordIndex = languageKeywordList.findIndex(
 			(keyword: KeywordObject) => activeHoverTokenText.match(`^${keyword.key}`) !== null

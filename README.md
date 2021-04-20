@@ -29,7 +29,13 @@ Syntax Highlighter Demo:
 
 Keyword Documentation Hover Provider Demo:
 
-* (TODO - Add demo image of the hover provider.)
+<p float="left">
+  <img src="./image_assets/hover_demo.jpg"/>
+</p>
+
+<p float="left">
+  <img src="./image_assets/hover_demo_2.jpg"/>
+</p>
 
 ### Use
 
@@ -44,9 +50,14 @@ The theme works best with Monakai Dimmed or Dark+.
 
 ## Coming Soon
 
+### Extension
 * Language Server Rework
   * Auto Completion
   * Linting
+
+### Syntax
+* UniVerse PROC Syntax
+* User Exits
 
 ## Contributing
 
