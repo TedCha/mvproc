@@ -1,70 +1,64 @@
-# mvproc README
-
-This is the README for your extension "mvproc". After writing up a brief description, we recommend including the following sections.
+# VSCode MultiValue PROC Extension
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+### Syntax Highlighter
 
-For example if there is an image subfolder under your extension project workspace:
+The syntax highlighter is one of the main features of the VSCode MultiValue PROC Extension. It provides developers who use the language a better way to update existing programs or develop new programs in any flavor of the MultiValue PROC language.
 
-\!\[feature X\]\(images/feature-x.png\)
+The VSCode MultiValue PROC Extension will highlight the following:
+* Commands (A, H, RO, IF, STOFF, etc.)
+* Command Parameters
+* Labels
+* Unquoted and Quoted Strings
+* Comments
+* Numeric Digits
+* PROC Identifier (PQ)
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+### Keyword Documentation Hover Provider
 
-## Requirements
+To provide a better development experience, the VSCode MultiValue PROC Extension ships with a Hover Provider that allows developers to quickly get relevant keyword documentation just by hovering over it!
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+### Demo
 
-## Extension Settings
+Syntax Highlighter Demo:
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+<p float="left">
+  <img src="./image_assets/syntax_highlighter_demo.jpg"/>
+</p>
 
-For example:
+Keyword Documentation Hover Provider Demo:
 
-This extension contributes the following settings:
+<p float="left">
+  <img src="./image_assets/hover_demo.jpg"/>
+</p>
 
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
+<p float="left">
+  <img src="./image_assets/hover_demo_2.jpg"/>
+</p>
 
-## Known Issues
+### Use
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+The mvBase PROC Syntax Highlighter can be activated in two ways:
 
-## Release Notes
+1. Changing the file extension to `.proc`. VSCode will automatically recognize that a file needs to be interpreted by the MultiValue PROC Syntax Highlighter if it has a `.proc` file extension.
+2. Use the Command Palette (Ctrl+Shift+P) to select **Change Language Mode**. From there you can select MultiValue PROC as the language for the file.
 
-Users appreciate release notes as you update your extension.
+### Notes
 
-### 1.0.0
+The theme works best with Monakai Dimmed or Dark+.
 
-Initial release of ...
+## Coming Soon
 
-### 1.0.1
+### Extension
+* Language Server Rework
+  * Auto Completion
+  * Linting
 
-Fixed issue #.
+### Syntax
+* UniVerse PROC Syntax
+* User Exits
 
-### 1.1.0
+## Contributing
 
-Added features X, Y, and Z.
-
------------------------------------------------------------------------------------------------------------
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+Please raise any existing issues with this extension through [GitHub](https://github.com/tcharts-boop/mvbase-proc-extension/issues).
