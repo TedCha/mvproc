@@ -13,6 +13,6 @@ All notable changes to the "mvproc" extension will be documented in this file.
     * Conversion from Grammar to Extension
     * Hover Command Documentation
 
-## 1.2.0 (Current Dev Version)
+## 1.3.0 (Current Dev Version)
 * Bugfix:
     * Converted from webpack to tsc to fix distribution error
