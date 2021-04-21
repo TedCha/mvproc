@@ -36,7 +36,12 @@ function parseIfExpression(activeHoverLineText, activeCharPosition) {
         return undefined;
     }
     let ifExpressionText = ifExpressionMatch[0];
-    return activeHoverLineText.substring(ifExpressionText.length);
+    if (activeCharPosition >= ifExpressionText.length) {
+        return activeHoverLineText.substring(ifExpressionText.length);
+    }
+    else {
+        return undefined;
+    }
 }
 function parseTextLineForMatch(activeHoverTokenText, activeHoverLineText, position) {
     let tokenizedText = activeHoverLineText.split(" ");

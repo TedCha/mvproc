@@ -4,6 +4,7 @@
 		"resolveJsonModule": true,
 		"target": "es6",
 		"outDir": "dist",
+		"rootDir": "src",
 		"lib": [
 			"es6"
 		],

@@ -32,7 +32,17 @@
             "detail": "F"
         },
         {
-            "key": "GOTO|GO|G",
+            "key": "G",
+            "documentation": "Transfers control to another command within a PROC, and continues to execute from that command.",
+            "detail": "GOTO|GO|G {*label#* | A [*parameter#*]}"
+        },
+        {
+            "key": "GO",
+            "documentation": "Transfers control to another command within a PROC, and continues to execute from that command.",
+            "detail": "GOTO|GO|G {*label#* | A [*parameter#*]}"
+        },
+        {
+            "key": "GOTO",
             "documentation": "Transfers control to another command within a PROC, and continues to execute from that command.",
             "detail": "GOTO|GO|G {*label#* | A [*parameter#*]}"
         },

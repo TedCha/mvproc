@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import * as languageDefinitionFile from '../syntaxes/mvprocLanguage.json';
+// import * as languageDefinitionFile from '../syntaxes/mvprocLanguage.json';
 
 interface KeywordObject {
 	key: string;
@@ -11,6 +11,8 @@ interface LanguageDefinition {
 	language: string;
 	keywords: KeywordObject[];
 }
+
+const languageDefinitionFile = require("../syntaxes/mvprocLanguage.json");
 
 const languageDefinition: LanguageDefinition = languageDefinitionFile;
 let languageKeywordList: KeywordObject[];
@@ -60,7 +62,12 @@ function parseIfExpression(activeHoverLineText: string, activeCharPosition: numb
 
 	let ifExpressionText: string = ifExpressionMatch[0];
 
-	return activeHoverLineText.substring(ifExpressionText.length);
+	if (activeCharPosition >= ifExpressionText.length) {
+		return activeHoverLineText.substring(ifExpressionText.length);
+	} else {
+		return undefined;
+	}
+
 }
 
 function parseTextLineForMatch(activeHoverTokenText: string, activeHoverLineText: string, position: vscode.Position): KeywordObject | undefined {
